@@ -1,0 +1,66 @@
+{
+  "apiVersion": 1,
+  "id": "mage",
+  "name": "Mage",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 100, "moveSpeed": 66 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    { "label": "Bolt" },
+    { "label": "Anchor" },
+    { "label": "Zone" },
+    { "label": "Turret" }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 4
+    },
+    "bolt": {
+      "type": "sprite",
+      "path": "sprites/bolt.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 12
+    },
+    "spark": {
+      "type": "sprite",
+      "path": "sprites/spark.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 3,
+      "fps": 12
+    },
+    "turret": {
+      "type": "sprite",
+      "path": "sprites/turret.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 3
+    },
+    "zone": {
+      "type": "sprite",
+      "path": "sprites/zone.png",
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "frames": 2,
+      "fps": 4
+    },
+    "rune": {
+      "type": "sprite",
+      "path": "sprites/rune.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 3
+    },
+    "cast": { "type": "sound", "path": "sounds/cast.wav" },
+    "zap": { "type": "sound", "path": "sounds/zap.wav" }
+  }
+}

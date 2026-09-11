@@ -1,0 +1,74 @@
+{
+  "apiVersion": 1,
+  "id": "bud",
+  "name": "Bud",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 100, "moveSpeed": 66 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    { "label": "Volley" },
+    { "label": "Tight" },
+    { "label": "Mine" },
+    { "label": "Morph" }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 4
+    },
+    "thorn": {
+      "type": "sprite",
+      "path": "sprites/thorn.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 6
+    },
+    "seed": {
+      "type": "sprite",
+      "path": "sprites/seed.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 5
+    },
+    "seedthorn": {
+      "type": "sprite",
+      "path": "sprites/seedthorn.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 7
+    },
+    "shot": {
+      "type": "sprite",
+      "path": "sprites/shot.png",
+      "frameWidth": 4,
+      "frameHeight": 4,
+      "frames": 1,
+      "fps": 1
+    },
+    "mine": {
+      "type": "sprite",
+      "path": "sprites/mine.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 3
+    },
+    "boom": {
+      "type": "sprite",
+      "path": "sprites/boom.png",
+      "frameWidth": 24,
+      "frameHeight": 24,
+      "frames": 3,
+      "fps": 12
+    },
+    "pop": { "type": "sound", "path": "sounds/pop.wav" },
+    "boom_sfx": { "type": "sound", "path": "sounds/boom.wav" }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "apiVersion": 1,
+  "id": "fighter",
+  "name": "Fighter",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 120, "moveSpeed": 72 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    { "label": "Slash" },
+    { "label": "Rush" },
+    { "label": "Charge" },
+    { "label": "Repel" }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 6
+    },
+    "hit": { "type": "sound", "path": "sounds/hit.wav" }
+  }
+}

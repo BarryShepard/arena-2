@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ARENA / File Mod Runtime</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="eyebrow">LOCAL · TWO PLAYERS · FILE MODS</span>
+        <h1>ARENA<span> 01</span></h1>
+        <p>Четыре способности. Одна клавиатура. Три минуты.</p>
+      </header>
+      <section id="selection">
+        <div class="selectors">
+          <label class="p1">PLAYER 1<select id="p1"></select></label
+          ><span class="versus">VS</span
+          ><label class="p2">PLAYER 2<select id="p2"></select></label>
+        </div>
+        <button id="start">Start match</button
+        ><button id="reload">Reload mods</button>
+      </section>
+      <section id="game" hidden>
+        <div class="matchbar">
+          <span class="p1">PLAYER 1</span><strong id="clock">3:00</strong
+          ><span class="p2">PLAYER 2</span>
+        </div>
+        <div class="stage">
+          <canvas width="480" height="270"></canvas>
+          <div id="overlay" hidden></div>
+        </div>
+        <div id="hud"></div>
+        <nav>
+          <button id="pause">Pause</button><button id="restart">Restart</button
+          ><button id="back">Back</button>
+        </nav>
+      </section>
+      <p id="error" role="alert" hidden></p>
+      <footer>
+        <div class="p1"><b>P1</b> WASD · F / G / H / J</div>
+        <div class="p2">
+          <b>P2</b> ← ↑ ↓ → · Num 1 / 2 / 3 / 0<br /><small
+            >без numpad: I / O / P / [</small
+          >
+        </div>
+        <p>
+          Взгляд — по последнему движению. H / P: удерживай и отпусти для
+          тяжёлого удара.<br />Движение в 4 направлениях · Escape — пауза · 3:00
+          → ничья
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
