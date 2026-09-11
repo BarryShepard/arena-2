@@ -129,10 +129,39 @@ canvas {
   gap: 5px;
 }
 .slot {
+  position: relative;
   font-size: 11px;
   padding: 8px 5px;
   border: 1px solid #3a4b3d;
   min-height: 48px;
+}
+.slot[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  width: 200px;
+  background: #1c2922;
+  border: 1px solid #50634d;
+  color: #e7e7cf;
+  padding: 6px 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: normal;
+  text-align: left;
+  z-index: 5;
+  pointer-events: none;
+}
+.slots .slot:first-child[data-tip]:hover::after {
+  left: 0;
+  transform: none;
+}
+.slots .slot:last-child[data-tip]:hover::after {
+  left: auto;
+  right: 0;
+  transform: none;
 }
 .slot.active {
   background: #354e40;

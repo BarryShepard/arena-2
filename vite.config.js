@@ -62,6 +62,9 @@ export async function readPackage(id) {
   return { manifest, code: code.toString("utf8"), assets };
 }
 export default defineConfig({
+  // Relative asset URLs: the same dist works at a domain root and under a
+  // subpath (project Pages, a folder on a shared host).
+  base: "./",
   server: { host: "127.0.0.1", fs: { strict: true } },
   plugins: [
     {

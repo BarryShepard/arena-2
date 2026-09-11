@@ -26,7 +26,12 @@ export function validateManifest(m) {
     !Array.isArray(m.abilities) ||
     m.abilities.length !== 4 ||
     m.abilities.some(
-      (a) => !isObject(a) || typeof a.label !== "string" || a.label.length > 40,
+      (a) =>
+        !isObject(a) ||
+        typeof a.label !== "string" ||
+        a.label.length > 40 ||
+        (a.description !== undefined &&
+          (typeof a.description !== "string" || a.description.length > 200)),
     )
   )
     throw Error("Exactly four labelled ability slots required");

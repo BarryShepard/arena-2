@@ -35,7 +35,8 @@ let world = null,
   busy = false,
   acc = 0,
   last = 0,
-  selected = [];
+  selected = [],
+  manifests = [null, null];
 function showError(message) {
   $("#error").hidden = !message;
   $("#error").textContent = message ?? "";
@@ -45,6 +46,7 @@ function dispose() {
   assets?.dispose();
   world = null;
   assets = null;
+  manifests = [null, null];
   input.reset();
   acc = 0;
 }
@@ -82,6 +84,7 @@ async function start(restart = false) {
     await assets.unlock();
     selected = restart ? selected : [$("#p1").value, $("#p2").value];
     const packages = await Promise.all(selected.map(loadPackage));
+    manifests = packages.map((p) => p.manifest);
     await assets.load(packages);
     world = createWorld({
       width: 480,
@@ -153,9 +156,11 @@ function updateUI() {
     ...[1, 2].map((owner) => {
       const group = document.createElement("div");
       group.className = "slots p" + owner;
-      for (const slot of s.slots[owner] ?? []) {
+      (s.slots[owner] ?? []).forEach((slot, i) => {
         const el = document.createElement("div");
         el.className = "slot" + (slot.active ? " active" : "");
+        const description = manifests[owner - 1]?.abilities?.[i]?.description;
+        if (description) el.dataset.tip = description;
         const label = document.createElement("span");
         label.textContent = slot.label;
         const status = document.createElement("small");
@@ -163,7 +168,7 @@ function updateUI() {
           slot.cooldown > 0 ? slot.cooldown.toFixed(1) + "s" : "READY";
         el.append(label, status);
         group.append(el);
-      }
+      });
       return group;
     }),
   );

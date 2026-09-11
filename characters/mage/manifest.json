@@ -6,10 +6,22 @@
   "body": { "radius": 7, "maxHp": 100, "moveSpeed": 66 },
   "appearance": { "sprite": "body", "width": 16, "height": 16 },
   "abilities": [
-    { "label": "Bolt" },
-    { "label": "Anchor" },
-    { "label": "Zone" },
-    { "label": "Turret" }
+    {
+      "label": "Bolt",
+      "description": "Снаряд летит по прямой: 14 урона при попадании. КД 0.35с."
+    },
+    {
+      "label": "Anchor",
+      "description": "Ставит метку (держится 3с); повторное нажатие телепортирует обратно к ней. КД 0.25с."
+    },
+    {
+      "label": "Zone",
+      "description": "Зона урона перед собой: 4 урона каждые 0.25с в течение 3с. КД 4с."
+    },
+    {
+      "label": "Turret",
+      "description": "Призывает турель (40 HP) на 5с — сама стреляет по ближайшему врагу в радиусе 150, 8 урона за выстрел. КД 6с."
+    }
   ],
   "assets": {
     "body": {

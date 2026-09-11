@@ -6,10 +6,22 @@
   "body": { "radius": 7, "maxHp": 110, "moveSpeed": 66 },
   "appearance": { "sprite": "body", "width": 16, "height": 16 },
   "abilities": [
-    { "label": "Pseudopod" },
-    { "label": "Engulf" },
-    { "label": "Enzyme" },
-    { "label": "Cyst" }
+    {
+      "label": "Pseudopod",
+      "description": "Удар псевдоподией по конусу перед собой: 13 урона (делится между телами). КД 0.4с."
+    },
+    {
+      "label": "Engulf",
+      "description": "Хватает врага перед собой: 6 урона сразу, затем 3 урона каждые 0.2с, подтягивая к себе, в течение секунды. КД 3.5с."
+    },
+    {
+      "label": "Enzyme",
+      "description": "Облако фермента перед собой: 4 урона каждые 0.3с в течение 3с. КД 4с."
+    },
+    {
+      "label": "Cyst",
+      "description": "Затвердевает в цисту: снижает получаемый урон на 45% в течение 2.5с. КД 6с."
+    }
   ],
   "assets": {
     "body": {

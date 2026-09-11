@@ -4,7 +4,10 @@
 // бьёт по кругу, Surge — рывок по прямой, Mech Suit на время меняет slot 0 на
 // тяжёлый панч с усиленной лужей вместо дальнего плевка.
 const SPEED = 66;
-const TRAIL = { interval: 0.12, radius: 9, life: 0.9 };
+// radius stays below the body's own radius (7): a same-center puddle bigger
+// than the body would shield Puffer from incoming raycasts/projectiles,
+// which always hit the nearer (larger) circle first.
+const TRAIL = { interval: 0.12, radius: 5, life: 0.9 };
 const SPIT = { speed: 210, damage: 14, cd: 0.4, life: 1.5, push: 55 };
 const PUDDLE = { radius: 16, life: 1.4 };
 const QUILLS = { radius: 32, damage: 11, cd: 1.8, push: 80 };

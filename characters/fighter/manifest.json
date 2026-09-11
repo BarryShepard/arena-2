@@ -6,10 +6,22 @@
   "body": { "radius": 7, "maxHp": 120, "moveSpeed": 72 },
   "appearance": { "sprite": "body", "width": 16, "height": 16 },
   "abilities": [
-    { "label": "Slash" },
-    { "label": "Rush" },
-    { "label": "Charge" },
-    { "label": "Repel" }
+    {
+      "label": "Slash",
+      "description": "Удар клинком по конусу перед собой: 15 урона, небольшой отброс. КД 0.38с."
+    },
+    {
+      "label": "Rush",
+      "description": "Короткий рывок вперёд: 20 урона всем на пути, сильный отброс. КД 1.6с."
+    },
+    {
+      "label": "Charge",
+      "description": "Зажми, чтобы копить силу удара (до 1.5с). Урон растёт с 16 до 55, отброс и радиус — тоже. КД 1.2с после удара."
+    },
+    {
+      "label": "Repel",
+      "description": "Мощный удар по кругу вокруг себя: 10 урона, огромный отброс. КД 2с."
+    }
   ],
   "assets": {
     "body": {
