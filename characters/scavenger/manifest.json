@@ -1,0 +1,54 @@
+{
+  "apiVersion": 1,
+  "id": "scavenger",
+  "name": "Свалочник",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 105, "moveSpeed": 70 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    {
+      "label": "Резак",
+      "description": "Удар острым плавником-лезвием на руке по конусу перед собой: 12 урона, небольшой отброс. КД 0.35с."
+    },
+    {
+      "label": "Ракетный рывок",
+      "description": "Ножной ракетный ранец бросает вперёд: лезвие режет всех на пути, 18 урона и сильный отброс каждому встречному. КД 1.8с."
+    },
+    {
+      "label": "Магнит",
+      "description": "Магнитный захват тянет всех врагов в радиусе к себе. Урона нет. КД 4с."
+    },
+    {
+      "label": "Колючий доспех",
+      "description": "Магнит стягивает металлолом в шипастую броню на 4с: всё, что касается персонажа, получает урон каждые 0.3с. КД 7с."
+    }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 5
+    },
+    "spike": {
+      "type": "sprite",
+      "path": "sprites/spike.png",
+      "frameWidth": 24,
+      "frameHeight": 24,
+      "frames": 3,
+      "fps": 10
+    },
+    "spark": {
+      "type": "sprite",
+      "path": "sprites/spark.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 8
+    },
+    "clang": { "type": "sound", "path": "sounds/clang.wav" },
+    "hum": { "type": "sound", "path": "sounds/hum.wav" }
+  }
+}

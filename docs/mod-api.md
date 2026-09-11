@@ -47,10 +47,11 @@ defineCharacter({
 
 ## Сущность
 
-Поля снимка и `api.entity`: `id, ownerId, x, y, vx, vy, angle, radius, hp, maxHp, solid, countsForDefeat, sprite, scale, tags, contact` + необязательные `lifetime, width, height`; внутренние `ix, iy` — затухающий импульс. Дефолты `spawn`: `x,y 0`, `vx,vy 0`, `angle 0`, `radius 7`, `hp = maxHp ?? 100`, `maxHp = hp ?? 100` (задано одно из двух — второе копирует его; ни одного — 100/100), `solid false`, `countsForDefeat false`, `sprite 'body'`, `scale 1`, `tags []`, `contact false`, `lifetime/width/height` отсутствуют.
+Поля снимка и `api.entity`: `id, ownerId, x, y, vx, vy, angle, radius, hp, maxHp, solid, countsForDefeat, sprite, scale, tags, contact, visible` + необязательные `lifetime, width, height`; внутренние `ix, iy` — затухающий импульс. Дефолты `spawn`: `x,y 0`, `vx,vy 0`, `angle 0`, `radius 7`, `hp = maxHp ?? 100`, `maxHp = hp ?? 100` (задано одно из двух — второе копирует его; ни одного — 100/100), `solid false`, `countsForDefeat false`, `sprite 'body'`, `scale 1`, `tags []`, `contact false`, `visible true`, `lifetime/width/height` отсутствуют.
 
 - `solid`: только solid && hp>0 тела расталкиваются друг с другом (16 проходов), выталкиваются из кирпичей и зажимаются границей. **Non-solid не clamp'ится вообще**: проходит сквозь кирпич и уходит за границу; что делать при контакте (destroy/bounce), решает мод через `contact` + `lifetime`. Стартовое тело — `solid:true, countsForDefeat:true`.
 - `contact: boolean` — host генерирует события `contact` для этой сущности (см. sweep). Приводится к boolean.
+- `visible: boolean` — чисто рендер: `false` прячет спрайт, рамку-обводку, индикатор направления и полоску HP этой сущности на общем canvas (оба игрока смотрят в один экран, поэтому это не приватность per-player, а честная невидимость для обоих). Приводится к boolean. Не влияет на физику/коллизии/`queryCircle`/`raycast` — сущность остаётся полностью реальной, просто не рисуется.
 - `lifetime: number | null` — секунды; host вычитает `dt` каждый tick после движения; при `<= 0` — kill с `reason:'expired'`. `null`/отсутствие — бессрочно.
 - `width, height` — отображаемый размер (× `scale`); без них renderer берёт `frameWidth/frameHeight` ассета, а без ассета рисует квадрат `8 × scale`. На коллизии не влияют — коллизия только по `radius`.
 - `sprite` — строка ≤ 40 символов, ключ sprite-ассета владельца; отсутствующий ключ не ошибка (квадрат). Таблицы ассетов читаются только по собственным свойствам: имена вида `constructor`/`__proto__`/`hasOwnProperty` — просто отсутствующие ключи (квадрат), а не объекты из `Object.prototype`.
@@ -59,7 +60,7 @@ defineCharacter({
 
 `spawn(spec)` принимает ровно: `x, y, vx, vy, angle, radius, hp, maxHp, sprite, scale, solid, countsForDefeat, tags, contact, lifetime, width, height`. Иное поле → `Invalid spawn field <k>`; `ownerId` в spec → `Invalid entity ownership`. Все числа конечные (`Invalid finite <k>`), `|x|, |y|, |vx|, |vy|, radius, scale, width, height ≤ 1e6` (`Invalid magnitude <k>` — технический предел, см. «Технические бюджеты»), `radius/scale/width/height > 0` (`Invalid size`), `hp/maxHp > 0`, `tags` — массив строк ≤ 16 × ≤ 64 (`Invalid tags`).
 
-`patch(id, changes)` разрешает: `x, y, vx, vy, angle, radius, sprite, scale, solid, tags, contact, lifetime, width, height`. Запрещены `id, ownerId, hp, maxHp, countsForDefeat` → `Forbidden patch field <k>`. `lifetime:null` снимает срок; `width/height: undefined` снимает размер; `tags` проверяются так же, как при `spawn` (`Invalid tags`); `x, y, vx, vy, radius, scale, width, height` — тот же предел `1e6` (`Invalid magnitude <k>`).
+`patch(id, changes)` разрешает: `x, y, vx, vy, angle, radius, sprite, scale, solid, tags, contact, visible, lifetime, width, height`. Запрещены `id, ownerId, hp, maxHp, countsForDefeat` → `Forbidden patch field <k>`. `lifetime:null` снимает срок; `width/height: undefined` снимает размер; `tags` проверяются так же, как при `spawn` (`Invalid tags`); `x, y, vx, vy, radius, scale, width, height` — тот же предел `1e6` (`Invalid magnitude <k>`).
 
 ## Методы ctx.api
 

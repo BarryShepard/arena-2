@@ -159,6 +159,8 @@ function updateUI() {
       (s.slots[owner] ?? []).forEach((slot, i) => {
         const el = document.createElement("div");
         el.className = "slot" + (slot.active ? " active" : "");
+        el.dataset.owner = owner;
+        el.dataset.slot = i;
         const description = manifests[owner - 1]?.abilities?.[i]?.description;
         if (description) el.dataset.tip = description;
         const label = document.createElement("span");
@@ -212,6 +214,23 @@ window.addEventListener("keydown", (e) => {
   }
 });
 window.addEventListener("keyup", (e) => input.key(e.code, false));
+let mouseSlotCode = null;
+$("#hud").addEventListener("pointerdown", (e) => {
+  const el = e.target.closest(".slot");
+  if (!el || !world || paused) return;
+  const code = bindings[el.dataset.owner - 1]?.slots[el.dataset.slot]?.[0];
+  if (!code) return;
+  e.preventDefault();
+  mouseSlotCode = code;
+  input.key(code, true);
+});
+function releaseMouseSlot() {
+  if (!mouseSlotCode) return;
+  input.key(mouseSlotCode, false);
+  mouseSlotCode = null;
+}
+window.addEventListener("pointerup", releaseMouseSlot);
+window.addEventListener("pointercancel", releaseMouseSlot);
 window.addEventListener("blur", () => pause(true));
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) pause(true);

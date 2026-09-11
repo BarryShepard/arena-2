@@ -1,0 +1,54 @@
+{
+  "apiVersion": 1,
+  "id": "bull",
+  "name": "Бугай",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 115, "moveSpeed": 78 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    {
+      "label": "Рога",
+      "description": "Бьёт рогами по прямой: 16 урона первому врагу и отбрасывает его. Сразу получает щит на 22 поглощения (4с). КД 1.6с."
+    },
+    {
+      "label": "Аркан",
+      "description": "Притягивает ближайшего врага перед собой цепью и станит его на 0.8с. Урона не наносит. КД 5с."
+    },
+    {
+      "label": "Наездник",
+      "description": "Телепортируется на голову врага и душит его 1.5с, нанося урон каждые 0.3с. КД 6.5с."
+    },
+    {
+      "label": "Минотавр",
+      "description": "Превращается в минотавра: хватает и жрёт ближайшего врага, затем 5с крупнее, быстрее и живучее. КД 22с."
+    }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 5
+    },
+    "minotaur": {
+      "type": "sprite",
+      "path": "sprites/minotaur.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 6
+    },
+    "gore": {
+      "type": "sprite",
+      "path": "sprites/gore.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 8
+    },
+    "roar": { "type": "sound", "path": "sounds/roar.wav" },
+    "crunch": { "type": "sound", "path": "sounds/crunch.wav" }
+  }
+}

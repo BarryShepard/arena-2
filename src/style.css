@@ -134,6 +134,14 @@ canvas {
   padding: 8px 5px;
   border: 1px solid #3a4b3d;
   min-height: 48px;
+  cursor: pointer;
+  user-select: none;
+}
+.slot:hover {
+  border-color: #6c7c69;
+}
+.slot:active {
+  background: #263429;
 }
 .slot[data-tip]:hover::after {
   content: attr(data-tip);

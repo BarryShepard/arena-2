@@ -28,6 +28,7 @@ const SPAWN_FIELDS = [
   "countsForDefeat",
   "tags",
   "contact",
+  "visible",
   "lifetime",
   "width",
   "height",
@@ -44,6 +45,7 @@ const PATCH_FIELDS = [
   "solid",
   "tags",
   "contact",
+  "visible",
   "lifetime",
   "width",
   "height",
@@ -85,7 +87,7 @@ const field = (k, v) => {
   if (SIZE.includes(k) && v <= 0) throw Error("Invalid size");
   if (k === "sprite" && (typeof v !== "string" || v.length > 40))
     throw Error("Invalid sprite");
-  if (k === "contact") return !!v;
+  if (k === "contact" || k === "visible") return !!v;
   if (k === "tags") {
     if (
       !Array.isArray(v) ||
@@ -144,6 +146,7 @@ class World {
       scale: 1,
       tags: [],
       contact: false,
+      visible: true,
       ...spec,
     };
     e.id = id;

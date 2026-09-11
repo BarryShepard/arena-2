@@ -31,6 +31,7 @@ export function render(ctx, s, assets) {
       Math.cos(s.time * 129) * s.shake.amount,
     );
   for (const e of s.entities) {
+    if (e.visible === false) continue;
     const color = colors[e.ownerId];
     ctx.strokeStyle = color;
     ctx.lineWidth = 1;

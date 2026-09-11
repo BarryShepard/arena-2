@@ -1,0 +1,70 @@
+{
+  "apiVersion": 1,
+  "id": "stool",
+  "name": "Бешеная табуретка",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 100, "moveSpeed": 68 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    {
+      "label": "Гвозди",
+      "description": "Стреляет гвоздём по прямой: 14 урона, снаряд летит через всю арену. КД 0.5с. В ближнем режиме (см. «Оторвать ногу») бьёт ножкой по конусу: 16 урона."
+    },
+    {
+      "label": "Наскок",
+      "description": "Прыгает вперёд, врезаясь в первого встречного: 12 урона и подтягивает к себе, затем 0.45с добивает гвоздями всех рядом (5 урона трижды). КД 2.6с."
+    },
+    {
+      "label": "Оторвать ногу",
+      "description": "Отрывает ногу и переходит в ближний бой ножкой вместо стрельбы гвоздями: скорость падает на 25%. Повторное нажатие приделывает ногу обратно. КД 1.2с. Урона не наносит."
+    },
+    {
+      "label": "Тяжёлый прыжок",
+      "description": "Мощный прыжок вперёд: 30 урона и сильный отброс первому встречному на пути. КД 5.5с."
+    }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 3,
+      "fps": 6
+    },
+    "body_melee": {
+      "type": "sprite",
+      "path": "sprites/body_melee.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 3,
+      "fps": 6
+    },
+    "nail": {
+      "type": "sprite",
+      "path": "sprites/nail.png",
+      "frameWidth": 4,
+      "frameHeight": 8,
+      "frames": 1,
+      "fps": 1
+    },
+    "leg": {
+      "type": "sprite",
+      "path": "sprites/leg.png",
+      "frameWidth": 8,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 10
+    },
+    "spark": {
+      "type": "sprite",
+      "path": "sprites/spark.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 8
+    },
+    "clack": { "type": "sound", "path": "sounds/clack.wav" },
+    "creak": { "type": "sound", "path": "sounds/creak.wav" }
+  }
+}

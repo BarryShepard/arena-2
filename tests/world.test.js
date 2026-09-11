@@ -87,7 +87,14 @@ test("spawn whitelist, hp→maxHp default, sizes, lifetime expiry and patch guar
   const e = w.entities.get(id);
   assert.equal(e.maxHp, 40);
   assert.equal(e.contact, true);
+  assert.equal(e.visible, true);
   assert.equal("width" in e, false);
+  const invisible = w.entities.get(w.spawn({ ownerId: 1, visible: 0 }));
+  assert.equal(invisible.visible, false);
+  w.applyCommands(1, [
+    { op: "patch", id: invisible.id, changes: { visible: 1 } },
+  ]);
+  assert.equal(invisible.visible, true);
   assert.throws(
     () => w.applyCommands(1, [{ op: "patch", id, changes: { hp: 1 } }]),
     /Forbidden patch field hp/,

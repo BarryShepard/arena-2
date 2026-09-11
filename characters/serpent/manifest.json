@@ -1,0 +1,55 @@
+{
+  "apiVersion": 1,
+  "id": "serpent",
+  "name": "Полосатый змей",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 108, "moveSpeed": 70 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    {
+      "label": "Укус",
+      "description": "Резкий укус по сектору перед собой: 13 урона, небольшой отброс. КД 0.38с."
+    },
+    {
+      "label": "Ядовитый плевок",
+      "description": "Плевок ядом вперёд по курсу: урона нет, но короткий паралич при попадании. КД 3.2с."
+    },
+    {
+      "label": "Сброс кожи",
+      "description": "Сбрасывает кожу на месте — прочный барьер (34 HP), который нельзя пройти, только разрушить. Живёт 8с. КД 6с."
+    },
+    {
+      "label": "Невидимость",
+      "description": "Тело, полоска HP и все атаки скрываются на 3.5с. КД 8с."
+    }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 5
+    },
+    "spit": {
+      "type": "sprite",
+      "path": "sprites/spit.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 10
+    },
+    "skin": {
+      "type": "sprite",
+      "path": "sprites/skin.png",
+      "frameWidth": 24,
+      "frameHeight": 24,
+      "frames": 1,
+      "fps": 1
+    },
+    "hiss": { "type": "sound", "path": "sounds/hiss.wav" },
+    "spit_sfx": { "type": "sound", "path": "sounds/spit.wav" },
+    "shed": { "type": "sound", "path": "sounds/shed.wav" }
+  }
+}
