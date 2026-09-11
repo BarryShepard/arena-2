@@ -51,7 +51,7 @@ function dispose() {
 async function reload() {
   try {
     showError("");
-    const r = await fetch("/api/characters", { cache: "no-store" });
+    const r = await fetch("api/characters/index.json", { cache: "no-store" });
     if (!r.ok) throw Error(await r.text());
     const ids = await r.json();
     for (const sel of [$("#p1"), $("#p2")]) {

@@ -1,0 +1,58 @@
+{
+  "apiVersion": 1,
+  "id": "puffer",
+  "name": "Рыба-шар",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 100, "moveSpeed": 66 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    { "label": "Spit" },
+    { "label": "Quills" },
+    { "label": "Surge" },
+    { "label": "Mech Suit" }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 4
+    },
+    "robot": {
+      "type": "sprite",
+      "path": "sprites/robot.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 5
+    },
+    "water": {
+      "type": "sprite",
+      "path": "sprites/water.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 5
+    },
+    "spit": {
+      "type": "sprite",
+      "path": "sprites/spit.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 1,
+      "fps": 1
+    },
+    "spike": {
+      "type": "sprite",
+      "path": "sprites/spike.png",
+      "frameWidth": 24,
+      "frameHeight": 24,
+      "frames": 3,
+      "fps": 12
+    },
+    "splash": { "type": "sound", "path": "sounds/splash.wav" },
+    "thud": { "type": "sound", "path": "sounds/thud.wav" }
+  }
+}

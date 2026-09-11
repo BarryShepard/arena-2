@@ -71,7 +71,7 @@ export function validateManifest(m) {
   return m;
 }
 export async function loadPackage(id) {
-  const r = await fetch("/api/characters/" + encodeURIComponent(id), {
+  const r = await fetch("api/characters/" + encodeURIComponent(id) + ".json", {
     cache: "no-store",
   });
   if (!r.ok) throw Error(await r.text());

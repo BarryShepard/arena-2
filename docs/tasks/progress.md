@@ -11,3 +11,4 @@ Plan: docs/superpowers/plans/2026-09-11-arena-playable-prototype.md
 - User decisions (unchanged): Tank 1990 visual/movement reference; four cardinal input directions; 180s timer, timeout draw.
 - Workspace has no Git repository; changes are local files.
 - Планы на будущее (без сроков и приоритетов, со слов пользователя 2026-09-11): docs/roadmap.md.
+- Деплой (2026-09-11): каталог персонажей запекается в dist/api/characters/ на build (vite.config.js, generateBundle), клиент ходит по относительным путям api/characters/index.json и api/characters/<id>.json — одна схема в dev и в статике. Публикация на GitHub Pages (arena.dimaovcharenko.ru) через .github/workflows/deploy.yml. Ростер на статике заморожен на момент сборки; Reload mods там не пересканирует characters/.

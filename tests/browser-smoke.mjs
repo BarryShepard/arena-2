@@ -111,7 +111,7 @@ try {
   );
   await page.keyboard.up("KeyD");
   // Intercept only this test's package fetch; test a malformed mod through UI.
-  const packageRoute = "**/api/characters/fighter";
+  const packageRoute = "**/api/characters/fighter.json";
   const malformed = async (route) => {
     const response = await route.fetch();
     const p = await response.json();

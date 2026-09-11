@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Открыть **http://127.0.0.1:5173/**, выбрать персонажей и нажать Start match. Сервер слушает только loopback. После установки зависимостей внешние сервисы не нужны. Через `file://` игра не запускается. `npm run build` проверяет production bundle; для игры используется dev server, поскольку он предоставляет локальный каталог модов (статический `dist` сам по себе не содержит API каталога).
+Открыть **http://127.0.0.1:5173/**, выбрать персонажей и нажать Start match. Сервер слушает только loopback. После установки зависимостей внешние сервисы не нужны. Через `file://` игра не запускается. `npm run build` собирает production bundle и запекает каталог модов в `dist/api/characters/` (`index.json` + файл на пакет, ассеты внутри как data URI), поэтому статическая сборка играбельна без сервера. Отличие от dev: ростер заморожен на момент сборки — «Reload mods» на статике перечитывает те же файлы и не сканирует `characters/` заново. Новый персонаж на сайте появляется только после пересборки.
 
 ## Управление
 
@@ -80,6 +80,10 @@ npm run test:browser
 `npm test` запускает файлы последовательно (`--test-concurrency=1`): CPU-бюджет мода 8 мс на tick считается по wall-clock, и параллельные test-процессы давали ложные срабатывания. `tests/mutation.test.js` — mod-only mutation recipe: временная копия Fighter с новым id и переписанным слотом 0 обнаруживается и ведёт себя иначе без правки `src/`; `tests/adversarial.test.js` — 19 враждебных модов (`while(true)`, аллокация, рекурсия, spawn/timer/command/contact flood, NaN damage, cross-owner, path traversal, поддельный PNG, мусор из `beforeHit`, мусорные поля в `slot`, абсурдные магнитуды `1e308`), каждый заканчивается атрибутированной ошибкой, закрытием VM и стартом следующего матча. Это bounded failure, не аудит безопасности.
 
 Browser smoke сам поднимает сервер на 127.0.0.1:5178, управляет обоими игроками физическими клавишами и проходит полный цикл: Fighter/Fighter (бой до результата, пауза/blur, Restart, Reload, восстановление после сломанного мода), Mage vs Bud (все 8 слотов, снаряды, зона, турель, эффекты ring/sprite/beam), распад Bud на пять семян и управление группой до победы Fighter, mirror Mage/Mage. Снимки: `docs/artifacts/task1-browser.png`, `task2-mage-bud.png`, `task2-bud-burst.png`. Все 12 способностей Mage/Bud также прогнаны через тот же QuickJS runtime в `tests/mage.test.js` и `tests/bud.test.js`.
+
+## Деплой
+
+Публичная сборка: **https://arena.dimaovcharenko.ru** — GitHub Pages, workflow `.github/workflows/deploy.yml` (push в `main` → `npm ci` → `npm test` → `npm run build` → deploy). Красные тесты останавливают деплой. Домен задан в `public/CNAME`.
 
 ## Состояние
 

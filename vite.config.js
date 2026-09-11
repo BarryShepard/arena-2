@@ -72,15 +72,12 @@ export default defineConfig({
           if (!url.pathname.startsWith("/api/characters")) return next();
           res.setHeader("Cache-Control", "no-store");
           try {
-            let result;
-            if (url.pathname === "/api/characters")
-              result = await listPackages();
-            else
-              result = await readPackage(
-                decodeURIComponent(
-                  url.pathname.slice("/api/characters/".length),
-                ),
-              );
+            // Same URL shape the static build emits, so dev and dist agree.
+            const rest = url.pathname.slice("/api/characters/".length);
+            if (!rest.endsWith(".json")) throw Error("Invalid catalog path");
+            const name = decodeURIComponent(rest.slice(0, -".json".length));
+            const result =
+              name === "index" ? await listPackages() : await readPackage(name);
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify(result));
           } catch (e) {
@@ -88,6 +85,31 @@ export default defineConfig({
             res.end(e.message);
           }
         });
+      },
+      // The dev middleware does not exist in a static build, so bake the same
+      // catalog into dist/api/characters/. The roster is frozen at build time:
+      // "Reload mods" on a static deploy re-reads these files, it cannot rescan
+      // characters/. A package that fails validation fails the build.
+      async generateBundle() {
+        const ids = await listPackages();
+        this.emitFile({
+          type: "asset",
+          fileName: "api/characters/index.json",
+          source: JSON.stringify(ids),
+        });
+        for (const id of ids) {
+          let pkg;
+          try {
+            pkg = await readPackage(id);
+          } catch (e) {
+            this.error(`character package "${id}" is invalid: ${e.message}`);
+          }
+          this.emitFile({
+            type: "asset",
+            fileName: `api/characters/${id}.json`,
+            source: JSON.stringify(pkg),
+          });
+        }
       },
     },
   ],
