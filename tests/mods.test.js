@@ -16,11 +16,15 @@ const code = await readFile(
   "utf8",
 );
 const pkg = { manifest, code };
-async function match() {
+// Review recommendation M-5: the 8 ms CPU budget is wall-clock, so functional
+// tests that only care about behaviour raise it. Otherwise a slow machine (CI
+// runners especially) turns "Fighter can use its slots" into a budget failure.
+const FUNCTIONAL_TICK_MS = 500;
+async function match(overrides = {}) {
   const w = createWorld();
   try {
-    w.addPlayer(await createRuntime(pkg, 1), { x: 100, y: 100 });
-    w.addPlayer(await createRuntime(pkg, 2), { x: 124, y: 100 });
+    w.addPlayer(await createRuntime(pkg, 1, overrides), { x: 100, y: 100 });
+    w.addPlayer(await createRuntime(pkg, 2, overrides), { x: 124, y: 100 });
     return w;
   } catch (e) {
     w.dispose();
@@ -29,7 +33,7 @@ async function match() {
 }
 test("Fighter four abilities execute in QuickJS; charge and cooldown are isolated", async () => {
   for (let slot = 0; slot < 4; slot++) {
-    const w = await match();
+    const w = await match({ tickMs: FUNCTIONAL_TICK_MS });
     try {
       let inputs = [emptyInput(), emptyInput()];
       inputs[0].slots[slot] = { pressed: true, held: true, released: false };

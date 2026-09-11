@@ -774,8 +774,12 @@ test("12c. thrown undefined/Symbol/empty objects get a reason; huge messages are
 test("9b. the command budget is per owner per tick: 1024 from P1 never blames P2; 1025 across P1's callbacks does blame P1", async () => {
   const flood = (n) =>
     `for(let i=0;i<${n};i++)c.api.slot(0,{label:'a',cooldown:0,active:false});`;
+  // This case is about the command budget, not the CPU budget: issuing ~1024
+  // commands costs real time, and on a slow machine the wall-clock 8 ms budget
+  // would fire first and mask what is under test (review recommendation M-5).
+  const slack = { tickMs: 500 };
   // Exactly the budget from P1 in update, then the fighter P2 sends its own commands: fine.
-  const w = await arena(D(`update(c){${flood(1024)}}`));
+  const w = await arena(D(`update(c){${flood(1024)}}`), code, slack);
   try {
     for (let i = 0; i < 3; i++) w.step(1 / 60);
     assert.equal(w.error, null, "P2 is not charged for P1's commands");
@@ -791,17 +795,20 @@ test("9b. the command budget is per owner per tick: 1024 from P1 never blames P2
       `event(c,ev){if(ev.type==='beforeHit')${flood(1)}},update(c){if(c.world.time<0.02){${flood(1023)}c.api.damage(c.selfId,1);}}`,
     ),
     /^fighter P1: Command budget exceeded$/,
+    { overrides: slack },
   );
   // The same flood from P2 is attributed to P2 while P1 is the innocent fighter.
   await expectBounded(code, /^fighter P2: Command budget exceeded$/, {
     second: D(
       `event(c,ev){if(ev.type==='beforeHit')${flood(1)}},update(c){if(c.world.time<0.02){${flood(1023)}c.api.damage(c.selfId,1);}}`,
     ),
+    overrides: slack,
   });
   // Both owners at exactly the budget in the same tick: still no error.
   const both = await arena(
     D(`update(c){${flood(1024)}}`),
     D(`update(c){${flood(1024)}}`),
+    slack,
   );
   try {
     both.step(1 / 60);
