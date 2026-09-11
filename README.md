@@ -83,7 +83,15 @@ Browser smoke сам поднимает сервер на 127.0.0.1:5178, упр
 
 ## Деплой
 
-Публичная сборка: **https://arena.dimaovcharenko.ru** — GitHub Pages, workflow `.github/workflows/deploy.yml` (push в `main` → `npm ci` → `npm test` → `npm run build` → deploy). Красные тесты останавливают деплой. Домен задан в `public/CNAME`.
+Публичная сборка: **https://arena.dimaovcharenko.ru** — GitHub Pages, workflow `.github/workflows/deploy.yml` (push в `main` → `npm ci` → `npm test` → `npm run build` → deploy). Красные тесты останавливают деплой. Домен задан в `public/CNAME`; репозиторий — `BarryShepard/arena-2`, текущий адрес до привязки домена — https://barryshepard.github.io/arena-2/.
+
+Для домена нужна DNS-запись в панели reg.ru (nameservers домена — `ns1/ns2.reg.ru`):
+
+```
+arena.dimaovcharenko.ru.  CNAME  barryshepard.github.io.
+```
+
+После появления записи GitHub подхватит `CNAME` из сборки и выпустит сертификат Let'''s Encrypt (обычно минуты, иногда до часа).
 
 ## Состояние
 

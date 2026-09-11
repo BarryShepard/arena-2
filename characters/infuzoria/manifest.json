@@ -1,0 +1,42 @@
+{
+  "apiVersion": 1,
+  "id": "infuzoria",
+  "name": "Инфузория",
+  "entry": "main.js",
+  "body": { "radius": 7, "maxHp": 110, "moveSpeed": 66 },
+  "appearance": { "sprite": "body", "width": 16, "height": 16 },
+  "abilities": [
+    { "label": "Pseudopod" },
+    { "label": "Engulf" },
+    { "label": "Enzyme" },
+    { "label": "Cyst" }
+  ],
+  "assets": {
+    "body": {
+      "type": "sprite",
+      "path": "sprites/body.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frames": 2,
+      "fps": 5
+    },
+    "daughter": {
+      "type": "sprite",
+      "path": "sprites/daughter.png",
+      "frameWidth": 8,
+      "frameHeight": 8,
+      "frames": 2,
+      "fps": 6
+    },
+    "cloud": {
+      "type": "sprite",
+      "path": "sprites/cloud.png",
+      "frameWidth": 24,
+      "frameHeight": 24,
+      "frames": 3,
+      "fps": 8
+    },
+    "squelch": { "type": "sound", "path": "sounds/squelch.wav" },
+    "gloop": { "type": "sound", "path": "sounds/gloop.wav" }
+  }
+}
